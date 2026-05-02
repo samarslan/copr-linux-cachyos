@@ -178,6 +178,9 @@ Patch10:        %{_patch_src}/misc/nvidia/0001-Enable-atomic-kernel-modesetting-
         scripts/config --set-val X86_64_VERSION 3
     %endif
 
+    scripts/config -e X86_AMD_PSTATE
+    scripts/config --set-val X86_AMD_PSTATE_DEFAULT_MODE 3
+
     # Enable Secure boot support
     scripts/config -e CONFIG_IMA_SECURE_AND_OR_TRUSTED_BOOT
     scripts/config -e CONFIG_IMA
