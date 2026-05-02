@@ -73,10 +73,10 @@
 
 %define _module_args KERNEL_UNAME=%{_kver} IGNORE_PREEMPT_RT_PRESENCE=1 SYSSRC=%{_builddir}/linux-%{_tag} SYSOUT=%{_builddir}/linux-%{_tag}
 
-Name:           kernel-cachyos%{?_lto_args:-lto}
-Summary:        Linux BORE %{?_lto_args:+ LTO }Cachy Sauce Kernel by CachyOS with other patches and improvements.
+Name:           kernel-cachyos-znver5%{?_lto_args:-lto}
+Summary:        CachyOS Linux kernel (BORE scheduler, znver5 optimized)%{?_lto_args:, with LTO}
 Version:        %{_basekver}.%{_stablekver}
-Release:        cachyos1.znver5%{?_lto_args:.lto}%{?dist}
+Release:        cachyos1%{?_lto_args:.lto}.znver5%{?dist}
 License:        GPL-2.0-only
 URL:            https://cachyos.org
 
@@ -335,9 +335,6 @@ cd ..
         find %{buildroot}%{_kernel_dir}/nvidia -name '*.ko' -exec zstd --rm -19 {} +
         install -Dt %{buildroot}/%{_defaultlicensedir}/%{name}-nvidia-open -m644 COPYING
     %endif
-
-    # Enable BBR3 congestion control
-    echo "net.ipv4.tcp_congestion_control=bbr3" > %{buildroot}/etc/sysctl.d/99-bbr3.conf
 
 %package core
 Summary:        Linux BORE Cachy Sauce Kernel by CachyOS with other patches and improvements
